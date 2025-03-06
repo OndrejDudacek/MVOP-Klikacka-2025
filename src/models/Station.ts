@@ -1,5 +1,10 @@
 import { Material, MaterialColors } from "./Material.js";
 
+const factoryImage = new Image();
+factoryImage.src = "../../public/imgs/isometric-factory.png";
+const recIcon = new Image();
+recIcon.src = "../../public/imgs/Recycling_symbol.svg";
+
 class Station {
 	ctx: CanvasRenderingContext2D;
 	x: number;
@@ -28,9 +33,19 @@ class Station {
 	}
 
 	draw() {
-		this.ctx.fillStyle = MaterialColors[this.material];
-		this.ctx.fillRect(this.x, this.y, this.width, this.height);
-		this.ctx.fill();
+		if (factoryImage.complete && recIcon.complete) {
+			this.ctx.drawImage(factoryImage, this.x, this.y, this.width, this.height);
+		} else {
+			factoryImage.onload = () => {
+				this.ctx.drawImage(
+					factoryImage,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				);
+			};
+		}
 	}
 
 	getPosition() {

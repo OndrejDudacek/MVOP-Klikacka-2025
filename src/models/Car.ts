@@ -1,3 +1,6 @@
+const image = new Image();
+image.src = "../../public/imgs/garbage-hauler-.png";
+
 class Car {
 	ctx: CanvasRenderingContext2D;
 	x: number;
@@ -22,6 +25,16 @@ class Car {
 		this.height = height;
 		this.speed = speed;
 		this.quality = quality;
+	}
+
+	draw() {
+		if (image.complete) {
+			this.ctx.drawImage(image, this.x, this.y, this.width, this.height);
+		} else {
+			image.onload = () => {
+				this.ctx.drawImage(image, this.x, this.y, this.width, this.height);
+			};
+		}
 	}
 }
 
