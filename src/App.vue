@@ -1,58 +1,40 @@
-<script setup lang="ts">
-	import Canvas from "./components/Canvas.vue";
-</script>
-
 <template>
 	<Canvas></Canvas>
 	<aside>
 		<header>
 			<h1>Recykluj</h1>
 			<section>
-				<button>🏅</button>
-				<button>⚙️</button>
+				<Button>🏅</Button>
+				<Button>⚙️</Button>
 			</section>
 		</header>
 		<article class="progres">
 			<p class="money"><span>10000000</span> 💵</p>
-			<section class="greenesBar progresBar"><div></div></section>
+			<ProgressBar :progressPercantage="40"></ProgressBar>
 		</article>
 		<article class="upgrades">
 			<h2>Upgrades</h2>
 			<section class="aspect">
 				<h3>Stanice</h3>
-				<section>
-					<p>Rychlost</p>
-					<section class="progresBar"><div></div></section>
-					<button>⬆️</button>
-				</section>
-				<section>
-					<p>Kvalita</p>
-					<section class="progresBar"><div></div></section>
-					<button>⬆️</button>
-				</section>
+				<Upgrade>Rychlost</Upgrade>
+				<Upgrade>Kvalita</Upgrade>
 			</section>
 			<section class="aspect">
 				<h3>Vozy</h3>
-				<section>
-					<p>Rychlost</p>
-					<section class="progresBar"><div></div></section>
-					<button>⬆️</button>
-				</section>
-				<section>
-					<p>Kvalita</p>
-					<section class="progresBar"><div></div></section>
-					<button>⬆️</button>
-				</section>
+				<Upgrade>Rychlost</Upgrade>
+				<Upgrade>Kvalita</Upgrade>
 			</section>
 			<section class="aspect">
 				<h3>Pásy</h3>
-				<section>
-					<p>Rychlost</p>
-					<section class="progresBar"><div></div></section>
-					<button>⬆️</button>
-				</section>
+				<Upgrade>Rychlost</Upgrade>
 			</section>
 		</article>
-		<button class="clicker">♻️</button>
+		<Button clicker>♻️</Button>
 	</aside>
 </template>
+
+<script setup lang="ts">
+	import Canvas from "./components/Canvas.vue";
+	import Button from "./components/Button.vue";
+	import Upgrade from "./components/Upgrade.vue";
+</script>

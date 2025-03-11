@@ -12,8 +12,6 @@ class Station {
 	width: number;
 	height: number;
 	material: Material;
-	speed: number;
-	quality: number;
 	constructor(
 		ctx: CanvasRenderingContext2D,
 		x: number,
@@ -28,8 +26,6 @@ class Station {
 		this.width = width;
 		this.height = height;
 		this.material = material;
-		this.speed = 1;
-		this.quality = 1;
 	}
 
 	draw() {
