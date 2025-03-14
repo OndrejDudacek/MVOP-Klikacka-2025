@@ -9,27 +9,25 @@
 			</section>
 		</header>
 		<article class="progres">
-			<p class="money"><span>10000000</span> 💵</p>
-			<ProgressBar :progressPercantage="40"></ProgressBar>
+			<p id="money">{{ gameStore.money }} 💵</p>
+			<ProgressBar :progressPercantage="gameStore.progress"></ProgressBar>
 		</article>
 		<article class="upgrades">
 			<h2>Upgrades</h2>
-			<section class="aspect">
-				<h3>Stanice</h3>
-				<Upgrade>Rychlost</Upgrade>
-				<Upgrade>Kvalita</Upgrade>
-			</section>
-			<section class="aspect">
-				<h3>Vozy</h3>
-				<Upgrade>Rychlost</Upgrade>
-				<Upgrade>Kvalita</Upgrade>
-			</section>
-			<section class="aspect">
-				<h3>Pásy</h3>
-				<Upgrade>Rychlost</Upgrade>
+			<section
+				class="aspect"
+				v-for="aspect in upgradesStore.upgrades"
+				:key="aspect.name"
+			>
+				<h3>{{ aspect.name }}</h3>
+				<Upgrade
+					v-for="upgrade in aspect.upgrades"
+					:upgrade="upgrade"
+					:key="upgrade.name"
+				></Upgrade>
 			</section>
 		</article>
-		<Button clicker>♻️</Button>
+		<Button clicker @click="handleMainClick">♻️</Button>
 	</aside>
 </template>
 
@@ -37,4 +35,15 @@
 	import Canvas from "./components/Canvas.vue";
 	import Button from "./components/Button.vue";
 	import Upgrade from "./components/Upgrade.vue";
+	import ProgressBar from "./components/ProgressBar.vue";
+	import { useGameStore } from "./stores/game";
+	import { useUpgradesStore } from "./stores/upgrades";
+
+	const gameStore = useGameStore();
+	const upgradesStore = useUpgradesStore();
+
+	const handleMainClick = () => {
+		gameStore.money += 1;
+		console.log(gameStore.money);
+	};
 </script>

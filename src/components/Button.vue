@@ -39,14 +39,15 @@
             */
 			justify-self: center;
 			align-self: center;
-			transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			transition: all 0.15s;
 
 			&:hover {
 				transform: scale(1.03);
 			}
 
 			&:active {
-				transform: scale(0.93);
+				transform: scale(0.98);
+				transition: 0.1s;
 			}
 		}
 	}

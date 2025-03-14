@@ -1,9 +1,9 @@
 import { Material, MaterialColors } from "./Material.js";
 
 const factoryImage = new Image();
-factoryImage.src = "../../public/imgs/isometric-factory.png";
+factoryImage.src = "/imgs/isometric-factory.png";
 const recIcon = new Image();
-recIcon.src = "../../public/imgs/Recycling_symbol.svg";
+recIcon.src = "/imgs/Recycling_symbol.svg";
 
 class Station {
 	ctx: CanvasRenderingContext2D;

@@ -1,5 +1,5 @@
 const image = new Image();
-image.src = "../../public/imgs/garbage-hauler-.png";
+image.src = "/imgs/garbage-hauler-.png";
 
 class Car {
 	ctx: CanvasRenderingContext2D;

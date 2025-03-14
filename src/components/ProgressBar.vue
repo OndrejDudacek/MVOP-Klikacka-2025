@@ -5,24 +5,23 @@
 </template>
 
 <script setup lang="ts">
-	import { defineProps, ref, watch } from "vue";
+	import { ref, watch } from "vue";
 
-	// const props = defineProps({
-	// 	progressPercantage: {
-	// 		type: Number,
-	// 		required: true,
-	// 	},
-	// });
+	const props = defineProps({
+		progressPercantage: {
+			type: Number,
+			required: true,
+		},
+	});
 
-	// const progressPercantage = ref(props.progressPercantage + "%");
-	// watch(
-	// 	() => props.progressPercantage,
-	// 	() => {
-	// 		progressPercantage.value = props.progressPercantage + "%";
-	// 	}
-	// );
+	const progressPercantage = ref(props.progressPercantage + "%");
 
-	const progressPercantage = ref("40%");
+	watch(
+		() => props.progressPercantage,
+		(newValue) => {
+			progressPercantage.value = newValue + "%";
+		}
+	);
 </script>
 
 <style lang="scss" scoped>
