@@ -101,6 +101,7 @@
 		];
 
 		const draw = () => {
+			if (!canvas.value) return;
 			ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
 			road.draw();
 			pile.draw();

@@ -1,6 +1,6 @@
 <template>
-	<section>
-		<div></div>
+	<section class="progress-bar">
+		<div :style="{ width: `${progressPercantage}%` }"></div>
 	</section>
 </template>
 
@@ -14,27 +14,27 @@
 		},
 	});
 
-	const progressPercantage = ref(props.progressPercantage + "%");
+	const progressPercantage = ref(props.progressPercantage);
 
 	watch(
 		() => props.progressPercantage,
-		(newValue) => {
-			progressPercantage.value = newValue + "%";
+		() => {
+			console.log(props.progressPercantage);
+			progressPercantage.value = props.progressPercantage;
 		}
 	);
 </script>
 
 <style lang="scss" scoped>
 	@use "../assets/styles/variables" as *;
-	section {
-		width: 90%;
+	section.progress-bar {
+		width: 100%;
 		height: 0.4rem;
 		border-radius: 20px;
 		background-color: $background-primary-color;
 		padding: 0.03rem;
 	}
-	section > div {
-		width: v-bind(progressPercantage);
+	section.progress-bar > div {
 		height: 100%;
 		border-radius: 20px;
 		background-color: $primary-dark-color;

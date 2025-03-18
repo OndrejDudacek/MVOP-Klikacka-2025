@@ -23,7 +23,8 @@
 				<Upgrade
 					v-for="upgrade in aspect.upgrades"
 					:upgrade="upgrade"
-					:key="upgrade.name"
+					:aspectName="aspect.name"
+					:key="upgrade.displayName"
 				></Upgrade>
 			</section>
 		</article>
@@ -44,6 +45,5 @@
 
 	const handleMainClick = () => {
 		gameStore.money += 1;
-		console.log(gameStore.money);
 	};
 </script>

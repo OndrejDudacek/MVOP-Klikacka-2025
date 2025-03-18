@@ -1,30 +1,30 @@
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { defineStore } from "pinia";
 
 export type Upgrade = {
 	type: string;
-	name: string;
+	displayName: string;
 	description: string;
 	cost: number;
 	purchased: number;
 	max: number;
 };
 
-export type Thing = {
+export type Aspect = {
 	name: string;
 	displayName: string;
 	upgrades: Upgrade[];
 };
 
 export const useUpgradesStore = defineStore("upgrades", () => {
-	const upgrades = ref<Thing[]>([
+	const upgrades = ref<Aspect[]>([
 		{
 			name: "Station",
 			displayName: "Stanice",
 			upgrades: [
 				{
 					type: "speed",
-					name: "Rychlost",
+					displayName: "Rychlost",
 					description: "Zvyšuje rychlost stanice o 1",
 					cost: 10,
 					purchased: 0,
@@ -32,11 +32,11 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 				},
 				{
 					type: "quality",
-					name: "Kvalita",
+					displayName: "Kvalita",
 					description: "Zvyšuje kvalitu stanice o 1",
 					cost: 10,
 					purchased: 0,
-					max: 10,
+					max: 30,
 				},
 			],
 		},
@@ -46,7 +46,7 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 			upgrades: [
 				{
 					type: "speed",
-					name: "Rychlost",
+					displayName: "Rychlost",
 					description: "Zvyšuje rychlost vozidel o 1",
 					cost: 10,
 					purchased: 0,
@@ -54,11 +54,11 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 				},
 				{
 					type: "quality",
-					name: "Kvalita",
+					displayName: "Kvalita",
 					description: "Zvyšuje kvalitu vozidel o 1",
 					cost: 10,
 					purchased: 0,
-					max: 10,
+					max: 30,
 				},
 			],
 		},
@@ -68,7 +68,7 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 			upgrades: [
 				{
 					type: "speed",
-					name: "Rychlost",
+					displayName: "Rychlost",
 					description: "Zvyšuje rychlost pásů o 1",
 					cost: 10,
 					purchased: 0,
@@ -77,5 +77,16 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 			],
 		},
 	]);
-	return { upgrades };
+
+	const moneyPerSecond = computed(() => {
+		let mps = 1;
+		for (const thing of upgrades.value) {
+			for (const upgrade of thing.upgrades) {
+				if (upgrade.type === "speed") mps += upgrade.purchased;
+				else if (upgrade.type === "quality") mps += upgrade.purchased * 2;
+			}
+		}
+		return mps;
+	});
+	return { upgrades, moneyPerSecond };
 });
