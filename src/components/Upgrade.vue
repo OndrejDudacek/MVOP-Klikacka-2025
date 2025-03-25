@@ -1,8 +1,13 @@
 <template>
 	<section class="upgrade">
-		<p>{{ upgrade.displayName }}</p>
+		<p>
+			{{ reactiveUpgrade.displayName }}
+			<strong>{{ reactiveUpgrade.cost }} 💵</strong>
+		</p>
 		<ProgressBar
-			:progressPercantage="Math.floor((upgrade.purchased / upgrade.max) * 100)"
+			:progressPercantage="
+				Math.floor((reactiveUpgrade.purchased / reactiveUpgrade.max) * 100)
+			"
 		></ProgressBar>
 		<Button @click="buyUpgrade">⬆️</Button>
 	</section>
@@ -11,13 +16,13 @@
 <script setup lang="ts">
 	import ProgressBar from "./ProgressBar.vue";
 	import Button from "./Button.vue";
-	import type { PropType } from "vue";
-	import type { Upgrade } from "@/stores/upgrades";
+	import type { UpgradeComputed } from "@/stores/upgrades";
 	import { useGameStore } from "@/stores/game";
+	import { ref, watch, type PropType } from "vue";
 
 	const props = defineProps({
 		upgrade: {
-			type: Object as PropType<Upgrade>,
+			type: Object as PropType<UpgradeComputed>,
 			required: true,
 		},
 		aspectName: {
@@ -25,6 +30,15 @@
 			required: true,
 		},
 	});
+
+	const reactiveUpgrade = ref(props.upgrade);
+	watch(
+		() => props.upgrade,
+		(newUpgrade) => {
+			reactiveUpgrade.value = newUpgrade;
+		},
+		{ immediate: true }
+	);
 
 	const gameStore = useGameStore();
 
@@ -37,7 +51,7 @@
 	@use "../assets/styles/variables" as *;
 	section.upgrade {
 		display: grid;
-		grid-template-columns: 2fr 5fr 1fr;
+		grid-template-columns: 4fr 5fr 1fr;
 		gap: $spacing-medium;
 		align-items: center;
 	}

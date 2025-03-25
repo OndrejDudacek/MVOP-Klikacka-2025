@@ -6,7 +6,6 @@ export const useGameStore = defineStore("game", () => {
 	const upgradesStore = useUpgradesStore();
 
 	const money = ref(0);
-	const progress = ref(0);
 
 	const buyUpgrade = (name: string, type: string) => {
 		const thing = upgradesStore.upgrades.find((thing) => thing.name === name);
@@ -29,5 +28,5 @@ export const useGameStore = defineStore("game", () => {
 		}, 500);
 	});
 
-	return { money, progress, buyUpgrade };
+	return { money, buyUpgrade };
 });

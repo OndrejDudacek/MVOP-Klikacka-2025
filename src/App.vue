@@ -9,8 +9,7 @@
 			</section>
 		</header>
 		<article class="progres">
-			<p id="money">{{ gameStore.money }} 💵</p>
-			<ProgressBar :progressPercantage="gameStore.progress"></ProgressBar>
+			<p id="money">{{ Math.floor(gameStore.money) }} 💵</p>
 		</article>
 		<article class="upgrades">
 			<h2>Upgrades</h2>
@@ -20,12 +19,14 @@
 				:key="aspect.name"
 			>
 				<h3>{{ aspect.name }}</h3>
-				<Upgrade
-					v-for="upgrade in aspect.upgrades"
-					:upgrade="upgrade"
-					:aspectName="aspect.name"
-					:key="upgrade.displayName"
-				></Upgrade>
+				<section>
+					<Upgrade
+						v-for="upgrade in aspect.upgrades"
+						:upgrade="upgrade"
+						:aspectName="aspect.name"
+						:key="upgrade.displayName"
+					></Upgrade>
+				</section>
 			</section>
 		</article>
 		<Button clicker @click="handleMainClick">♻️</Button>
@@ -36,7 +37,6 @@
 	import Canvas from "./components/Canvas.vue";
 	import Button from "./components/Button.vue";
 	import Upgrade from "./components/Upgrade.vue";
-	import ProgressBar from "./components/ProgressBar.vue";
 	import { useGameStore } from "./stores/game";
 	import { useUpgradesStore } from "./stores/upgrades";
 
