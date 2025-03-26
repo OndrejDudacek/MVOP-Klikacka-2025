@@ -26,22 +26,23 @@ export type Aspect = {
 };
 
 const computeCost = (startingCost: number, purchased: number): number => {
-	const finaleCost = Math.floor(
-		startingCost * Math.pow(2 + purchased / 2, purchased)
-	);
+	const finaleCost = Math.floor(startingCost + Math.pow(2, 1.5 * purchased));
 	return finaleCost;
 };
 
 const computeMoneyPerSecond = (upgrade: UpgradeComputed): number => {
-	console.log(upgrade);
 	const purchased = upgrade.purchased;
 	const cost = upgrade.cost;
 	let mps = 0;
 	if (upgrade.type === "speed") {
-		mps = Math.floor(cost * purchased * 0.05);
-	} else if (upgrade.type === "quality") {
-		mps = Math.floor(cost * purchased * 0.1);
+		mps = (cost * purchased * 0.01) / 2;
+		//mps = Math.floor((cost * purchased * 0.01) / 2);
 	}
+	if (upgrade.type === "quality") {
+		mps = cost * purchased * 0.01;
+		//mps = Math.floor(cost * purchased * 0.01);
+	}
+	console.log(mps);
 	return mps;
 };
 

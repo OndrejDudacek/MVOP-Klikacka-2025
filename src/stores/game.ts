@@ -25,7 +25,7 @@ export const useGameStore = defineStore("game", () => {
 	onMounted(() => {
 		setInterval(() => {
 			money.value += upgradesStore.moneyPerSecond;
-		}, 500);
+		}, 1000);
 	});
 
 	return { money, buyUpgrade };
