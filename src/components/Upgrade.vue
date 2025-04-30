@@ -9,7 +9,14 @@
 				Math.floor((reactiveUpgrade.purchased / reactiveUpgrade.max) * 100)
 			"
 		></ProgressBar>
-		<Button @click="buyUpgrade">⬆️</Button>
+		<Button
+			v-if="
+				gameStore.money >= reactiveUpgrade.cost &&
+				reactiveUpgrade.purchased < reactiveUpgrade.max
+			"
+			@click="buyUpgrade"
+			>⬆️</Button
+		>
 	</section>
 </template>
 

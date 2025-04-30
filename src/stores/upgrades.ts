@@ -25,8 +25,17 @@ export type Aspect = {
 	upgrades: Upgrade[];
 };
 
-const computeCost = (startingCost: number, purchased: number): number => {
-	const finaleCost = Math.floor(startingCost + Math.pow(2, 1.5 * purchased));
+const computeCost = (
+	startingCost: number,
+	purchased: number,
+	material?: boolean
+): number => {
+	let finaleCost = startingCost;
+	if (material) {
+		finaleCost = Math.floor(startingCost + Math.pow(2, 6 * purchased));
+	} else {
+		finaleCost = Math.floor(startingCost + Math.pow(2, 2 * purchased));
+	}
 	return finaleCost;
 };
 
@@ -42,7 +51,6 @@ const computeMoneyPerSecond = (upgrade: UpgradeComputed): number => {
 		mps = cost * purchased * 0.01;
 		//mps = Math.floor(cost * purchased * 0.01);
 	}
-	console.log(mps);
 	return mps;
 };
 
@@ -77,7 +85,7 @@ export const useUpgradesStore = defineStore("upgrades", () => {
 					displayName: "Materiál",
 					description: "Zvyšuje kvalitu materiálu o 1",
 					cost: computed((): number =>
-						computeCost(2000, upgrades.value[0].upgrades[2].purchased)
+						computeCost(2000, upgrades.value[0].upgrades[2].purchased, true)
 					),
 					purchased: 1,
 					max: 6,

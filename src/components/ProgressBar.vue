@@ -19,7 +19,6 @@
 	watch(
 		() => props.progressPercantage,
 		() => {
-			console.log(props.progressPercantage);
 			progressPercantage.value = props.progressPercantage;
 		}
 	);
